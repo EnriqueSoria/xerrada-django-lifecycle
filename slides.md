@@ -8,27 +8,29 @@ Enrique Soria
 
 # django-lifecycle
 
-Descubriendo cómo gestionar en Django el ciclo de vida de un modelo, _sin pelos ni señales_
+Descobrint com gestionar amb Django el cicle de vida d'un model, _sense pels ni senyals_
 
 [comment]: # (!!!)
 
-### Nuestro proyecto
+### El nostre projecte
 
-Vamos a suponer que estamos creando un blog.
+Suposem que volem crear un blog.
 
 [comment]: # (!!! data-auto-animate)
-### Nuestro proyecto
 
-Vamos a suponer que estamos creando un blog.
+### El nostre projecte
 
-Nuestro blog tiene publicaciones.
+Suposem que volem crear un blog.
+
+El nostre blog té publicacions.
 
 [comment]: # (!!! )
 
-### Nuestro proyecto
+### El nostre projecte
 
 ```python [4-7]
 from django.db import models
+from django.urls import reverse
 
 
 class Post(models.Model):
@@ -43,20 +45,21 @@ class Post(models.Model):
 
 [comment]: # (!!!)
 
-### Objetivo
+### Objectiu
 
-Setear el _slug_ de nuestro flamante blog automáticamente.
 
-¿Cómo lo haríais?
+Setejar l'_slug_ del nostre blog automàticament
+
+¿Com ho farieu?
 
 Note:
-(no, no vale decir con lifecycle)
- - Sobreescribiendo el save?
+(no, no val a dir amb lifecycle)
+ - Sobreescrivint el save?
  - Señales?
 
 [comment]: # (!!!)
 
-#### Sobreescribiendo el `.save()` 
+#### Sobreescrivint el `.save()` 
 
 ```python [2, 10-12]
 from django.db import models
@@ -76,9 +79,9 @@ class Post(models.Model):
 
 [comment]: # (!!! data-auto-animate)
 
-#### Sobreescribiendo el `.save()`
+#### Sobreescrivint el `.save()`
 
-...solamente cuando estamos creando la instancia
+...només quan creem la instància.
 
 ```python [11-12]
 from django.db import models
@@ -100,14 +103,14 @@ class Post(models.Model):
 
 [comment]: # (!!!)
 
-#### Sobreescribiendo el `.save()`
+#### Sobreescrivint el `.save()`
 
-No tiene mucho misterio. Aunque un tiempo después nos enteramos que django tiene una cosa
-llamada... [`signals`](https://docs.djangoproject.com/en/5.0/topics/signals/).
+No té molt de misteri. Però al cap d'un temps descobrim que Django té una cosa anomenada... 
+[`signals`](https://docs.djangoproject.com/en/5.0/topics/signals/).
 
 [comment]: # (!!!)
 
-#### Usando señales de Django
+#### Amb senyals de Django
 
 ```python
 # blog/signals.py
@@ -123,13 +126,13 @@ def on_post_pre_save_receiver(sender, instance, raw, using, update_fields):
 ```
 
 Note:
-Pinta bien, PERO esto hay que ubicarlo fuera del modelo
+Pinta bé, PERÒ s'ha de colocar fora del model
 
-...y ADEMÁS nos tenemos que acordar de registrar la señal en el `app.ready`
+...i a més a més ens hem d'enrecordar de registrar la senyal al `app.ready`
 
 [comment]: # (!!! data-auto-animate)
 
-#### Usando señales de Django
+#### Amb senyals de Django
 
 ```python
 # blog/signals.py
@@ -156,26 +159,26 @@ class MyAppConfig(AppConfig):
 
 [comment]: # (!!!)
 
-¡Genial, ya hemos aprendido a setear el slug en el momento de creación de una publicación, pero...
+Genial, ja hem aprés a setejar l'slug en el moment de la creació d'una publicació, però...
 
 [comment]: # (!!!)
 
-![la gente cambia](https://pbs.twimg.com/media/BmQIKItCUAA_yQP.jpg)
+![la gent canvia](https://pbs.twimg.com/media/BmQIKItCUAA_yQP.jpg)
 
-...y los títulos también
-
-[comment]: # (!!!)
-
-# Nuevos requerimientos
-
- - Cambiar el slug cuando el título cambia
- - Hacer un redirect de la antigua URL a la nueva
+...i els titul també
 
 [comment]: # (!!!)
 
-### Sobreescribiendo el `.save()`
+# Nous requeriments
 
-Cambiar el slug cuando el título cambia
+ - Canviar l'slug quan el titul canvia
+ - Fer un redirect de l'antiga URL a la nova
+
+[comment]: # (!!!)
+
+### Sobreescrivint el `.save()`
+
+Canviar l'slug quan el titul canvie
 
 ```python [5, 8]
 class Post(models.Model):
@@ -192,9 +195,9 @@ class Post(models.Model):
 
 [comment]: # (!!!)
 
-### Sobreescribiendo el `.save()`
+### Sobreescrivint el `.save()`
 
-Hacer un redirect de la antigua URL a la nueva
+Fer un redirect de l'URL antiga a la nova
 
 ```python [12-13]
 class Post(models.Model):
@@ -214,9 +217,9 @@ class Post(models.Model):
 
 [comment]: # (!!!)
 
-### Usando señales de Django
+### Amb senyals de Django
 
-Cambiar el slug cuando el título cambia
+Canviar l'slug quan el titul canvie
 
 ```python [4, 6]
 # blog/signals.py
@@ -230,11 +233,11 @@ def on_post_pre_save_receiver(sender, instance, raw, using, update_fields):
 
 [comment]: # (!!! data-auto-animate)
 
-### Usando señales de Django
+### Amb senyals de Django
 
-Cambiar el slug cuando el título cambia
+Canviar l'slug quan el titul canvie
 
-Hacer un redirect de la antigua URL a la nueva
+Fer un redirect de l'URL antiga a la nova
 
 ```python [7-13]
 # blog/signals.py
@@ -254,11 +257,11 @@ def on_post_pre_save_receiver(sender, instance, raw, using, update_fields):
 
 [comment]: # (!!!)
 
-### Usando django-lifecycle
+### Amb django-lifecycle
 
-Hemos venido a hablar de cierta librería, ¿verdad? 
+Hem vingut ací per a parlar de certa llibreria, veritat? 
 
-Vamos a reescribir los antiguos ejemplos usando django-lifecycle:
+Anem a reescriure els exemples anteriors amb django-lifecycle:
 
 
 ```python [3, 6]
@@ -275,7 +278,7 @@ class Post(LifecycleModel):
 
 [comment]: # (!!!)
 
-### Usando señales de Django
+### Amb django-lifecycle
 
 Vamos a crear unas funciones que hagan lo que queremos.
 
@@ -291,9 +294,9 @@ class Post(LifecycleModel):
 
 [comment]: # (!!!)
 
-### Usando señales de Django
+### Amb django-lifecycle
 
-`django-lifecycle` nos proporciona una utilidad para obtener el valor inicial: `initial_value(field_name)`
+`django-lifecycle` ens proporciona una utilitat per a obtindre el valor inicial: `initial_value(field_name)`
 
 ```python [9-14]
 class Post(LifecycleModel):
@@ -314,15 +317,15 @@ class Post(LifecycleModel):
 
 [comment]: # (!!!)
 
-### Usando señales de Django
+### Amb django-lifecycle
 
-#### Escoger [en qué momentos](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) se quieren realizar estas acciones.
+#### Escollir [en quins moments](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) volem realitzar estes accions.
 
 [comment]: # (!!! data-auto-animate)
 
-### Usando señales de Django
+### Amb django-lifecycle
 
-#### Escoger [en qué momentos](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) se quieren realizar estas acciones:
+#### Escollir [en quins moments](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) volem realitzar estes accions:
 
  - BEFORE_SAVE, AFTER_SAVE
  - BEFORE_CREATE, AFTER_CREATE
@@ -331,9 +334,9 @@ class Post(LifecycleModel):
 
 [comment]: # (!!!)
 
-### Usando señales de Django
+### Amb django-lifecycle
 
-####  Escoger [en qué momentos](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) se quieren realizar estas acciones:
+#### Escollir [en quins moments](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) volem realitzar estes accions:
 
 ```python [3, 7]
 class Post(LifecycleModel):
@@ -353,24 +356,24 @@ class Post(LifecycleModel):
 
 [comment]: # (!!!)
 
-### Usando señales de Django
+### Amb django-lifecycle
 
-Aunque no siempre se tienen que ejecutar. 
+Encara que no sempre s'han d'executar. 
 
-Hay que especificar [en qué condiciones se ejecutan los hooks](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#conditions).
+Volem especificar [quines condicions executen els hooks](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#conditions).
 
 Note:
-Requisitos:
- - slugify BEFORE_CREATE y cuando cambie el título
+Requisits:
+ - slugify BEFORE_CREATE i quan canvie el titul
 
 [comment]: # (!!! data-auto-animate)
 
-### Usando señales de Django
+### Amb django-lifecycle
 
 
-Aunque no siempre se tienen que ejecutar. 
+Encara que no sempre s'han d'executar. 
 
-Hay que especificar [en qué condiciones se ejecutan los hooks](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#conditions).
+Volem especificar [quines condicions executen els hooks](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#conditions).
 
 ```python
 WhenFieldHasChanged(field_name, has_changed)
@@ -388,11 +391,11 @@ WhenFieldValueChangesTo(field_name, value)
 
 [comment]: # (!!!)
 
-### Usando señales de Django
+### Amb django-lifecycle
 
-Aunque no siempre se tienen que ejecutar. 
+Encara que no sempre s'han d'executar. 
 
-Hay que especificar [en qué condiciones se ejecutan los hooks](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#conditions).
+Volem especificar [quines condicions executen els hooks](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#conditions).
 
 ```python [3-4, 8]
 class Post(LifecycleModel):
@@ -413,11 +416,11 @@ class Post(LifecycleModel):
 
 [comment]: # (!!!)
 
-### Usando señales de Django
+### Amb django-lifecycle
 
-Aunque no siempre se tienen que ejecutar. 
+Encara que no sempre s'han d'executar. 
 
-Hay que especificar [en qué condiciones se ejecutan los hooks](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#conditions).
+Volem especificar [quines condicions executen els hooks](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#conditions).
 
 ```python [5]
 class Post(LifecycleModel):
@@ -441,16 +444,16 @@ class Post(LifecycleModel):
 [comment]: # (!!!)
 
 
-### ¿Cómo nos podemos asegurar que `set_slug` se ejecute antes que el `create_redirect`?
+### ¿Com podem asegurar que `set_slug` s'execute abans del `create_redirect`?
 
-Con el parámetro `priority`:
+Amb el paràmetre `priority`:
 
 
 [comment]: # (!!!)
 
-### ¿Cómo nos podemos asegurar que `set_slug` se ejecute antes que el `create_redirect`?
+### ¿Com podem asegurar que `set_slug` s'execute abans del `create_redirect`?
 
-Con el parámetro `priority`:
+Amb el paràmetre `priority`:
 
 [comment]: #  (!!! data-auto-animate)
 
@@ -474,19 +477,19 @@ class Post(LifecycleModel):
 ```
 
 Note: 
-Esta fué mi primera PR a esta librería.
+Esta va ser la meua primera PR a esta llibreria
 
 [comment]: # (!!!)
 
-# Nuevos requerimientos
+# Nous requeriments
 
- - Impedir publicaciones sobre IA en nuestro blog
+ - Impedir publicacions sobre IA al nostre blog
 
 [comment]: # (!!!)
 
-## Custom conditions
+## Condicions personalitzades
 
-Si las condiciones que existen no nos convencen podemos crear nuestras propias condiciones:
+Si les condicions que ens oferix django-lifecycle no ens apanyen, podem crear les nostres pròpies condicions:
 
 ```python
 from django_lifecycle.conditions.base import ChainableCondition
@@ -504,7 +507,7 @@ class WhenFieldContains(ChainableCondition):
 
 [comment]: # (!!!)
 
-Si las condiciones que existen no nos convencen podemos crear nuestras propias condiciones:
+Si les condicions que ens oferix django-lifecycle no ens apanyen, podem crear les nostres pròpies condicions:
 
 ```python
 class Post(LifecycleModel):
@@ -518,21 +521,21 @@ class Post(LifecycleModel):
 
 [comment]: # (!!!)
 
-# ¿Cuándo elegir cada opción?
+# ¿Quan elegir cada opció?
  - django signals
- - sobreescribir `.save()`
+ - sobreescriure `.save()`
  - django-lifecycle
 
 Note:
-Ahora que hemos visto lo maravilloso que es django-lifecycle...
+Ara que ja hem vist lo fantàstic que es django-lifecycle...
 
 [comment]: # (!!!)
 
 ## Django signals
 
-- Modelos de apps de terceros
-- Comportamientos genéricos para muchos modelos
-- Acciones no relacionadas con el ciclo de vida de un modelo (i.e.: [django-allauth](https://docs.allauth.org/en/latest/account/signals.html))
+- Models d'apps de tercers
+- Comportaments genèrics per a molts models
+- Accions no relacionades amb el cicle de vida d'un model (i.e.: [django-allauth](https://docs.allauth.org/en/latest/account/signals.html))
 
 Note: 
 django-allauth:
@@ -543,12 +546,12 @@ django-allauth:
 
 [comment]: # (!!!)
 
-## Sobreescribir el `.save()`
+## Sobreescriure el `.save()`
 
-- Casos de usos muy simples
+- Casos d'ús molt simples
 
 Note:
-no añadir dependencia externa
+per no haver d'afegir una dependencia externa
 
 [comment]: # (!!!)
 
@@ -567,19 +570,19 @@ no añadir dependencia externa
 
 [comment]: # (!!!)
 
-### Limitaciones de `django-lifecycle`
+### Limitacions de `django-lifecycle`
 
-Debido a cómo funciona (sobreescribiendo el `.save`), existen [ciertas limitaciones](https://github.com/rsinger86/django-lifecycle/issues/143):
+Degut al funcionament de django-lifecycle (sobreescriu el `.save`), existeixen [certes limitacions](https://github.com/rsinger86/django-lifecycle/issues/143):
 
-- No se ejecuta cuando realizas acciones `bulk`. (las señales de Django si) 
-  - Deletes en el admin de Django
-  - Deletes en cascada al eliminar un objeto relacionado
-- No se ejecutan con relaciones M2M (se ejecutan en el `through`)
+- No s'executa quan realitzes accions en `bulk`. (las señales de Django si) 
+  - Deletes a l'admin de Django
+  - Deletes en cascada a l'eliminar un objecte relacionat
+- Relacions many2many (s'executen al `through`)
 
 [comment]: # (!!!)
 
-En conclusión, la librería django-lifecycle nos permite, de forma declarativa, crear una serie de acciones asociadas al
-ciclo de vida de un modelo Django.
+Per resumir: la llibreria django-lifecycle ens permeteix, de forma declarativa, crear una sèrie d'accions asociades
+al cicle de vida d'un model de Django.
 
 [comment]: # (!!!)
 
