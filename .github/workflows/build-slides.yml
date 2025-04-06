@@ -1,0 +1,41 @@
+name: Build slides
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Build slides
+        run: | 
+          # abort on errors
+          set -e
+          # Install dependencies
+          python -m pip install --upgrade pip
+          python -m pip install git+https://gitlab.com/da_doomer/markdown-slides.git@fd27dd09cf90f00093a393338e08953c8d65d68e
+          mkdir -p slides
+          mdslides slides.md --output_dir ./slides/
+          cd slides
+          git init
+          git config --global --add safe.directory $(pwd)
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git commit -m "Build slides"
+          cd ..
+      - name: Force push to destination branch
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          force: true
+          directory: ./slides
