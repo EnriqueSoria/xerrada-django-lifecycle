@@ -539,6 +539,7 @@ Ara que ja hem vist lo fantàstic que es django-lifecycle...
 
 [comment]: # (!!!)
 
+# ¿Quan elegir cada opció?
 ## Django signals
 
 - Models d'apps de tercers
@@ -554,6 +555,7 @@ django-allauth:
 
 [comment]: # (!!!)
 
+# ¿Quan elegir cada opció?
 ## Sobreescriure el `.save()`
 
 - Casos d'ús molt simples
@@ -564,7 +566,6 @@ per no haver d'afegir una dependencia externa
 [comment]: # (!!!)
 
 ## Para todo lo demás... 
-
 
 [comment]: # (!!!)
 
