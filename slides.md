@@ -325,13 +325,13 @@ class Post(LifecycleModel):
 
 ### Amb django-lifecycle
 
-#### Escollir [en quins moments](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) volem realitzar estes accions.
+Escollir [en quins moments](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) volem realitzar estes accions.
 
 [comment]: # (!!! data-auto-animate)
 
 ### Amb django-lifecycle
 
-#### Escollir [en quins moments](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) volem realitzar estes accions:
+Escollir [en quins moments](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) volem realitzar estes accions:
 
  - BEFORE_SAVE, AFTER_SAVE
  - BEFORE_CREATE, AFTER_CREATE
@@ -342,7 +342,7 @@ class Post(LifecycleModel):
 
 ### Amb django-lifecycle
 
-#### Escollir [en quins moments](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) volem realitzar estes accions:
+Escollir [en quins moments](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) volem realitzar estes accions:
 
 ```python [3, 7]
 class Post(LifecycleModel):
