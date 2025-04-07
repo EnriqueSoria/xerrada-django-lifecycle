@@ -165,7 +165,7 @@ Genial, ja hem aprés a setejar l'slug en el moment de la creació d'una publica
 
 ![la gent canvia](https://pbs.twimg.com/media/BmQIKItCUAA_yQP.jpg)
 
-...i els titul també
+...i els tituls també
 
 [comment]: # (!!!)
 
