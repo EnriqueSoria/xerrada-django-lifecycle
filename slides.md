@@ -583,7 +583,7 @@ per no haver d'afegir una dependencia externa
 
 Degut al funcionament de django-lifecycle (sobreescriu el `.save`), existeixen [certes limitacions](https://github.com/rsinger86/django-lifecycle/issues/143):
 
-- No s'executa quan realitzes accions en `bulk`. (las señales de Django si) 
+- No s'executa quan realitzes accions en `bulk`. (les senyals de Django si) 
   - Deletes a l'admin de Django
   - Deletes en cascada a l'eliminar un objecte relacionat
 - Relacions many2many (s'executen al `through`)
