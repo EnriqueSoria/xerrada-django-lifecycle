@@ -590,7 +590,8 @@ Degut al funcionament de django-lifecycle (sobreescriu el `.save`), existeixen [
 
 [comment]: # (!!!)
 
-Per resumir: la llibreria django-lifecycle ens permeteix, de forma declarativa, crear una sèrie d'accions asociades
+## django-lifecicle
+En conclusió: la llibreria django-lifecycle ens permeteix, de forma declarativa, crear una sèrie d'accions asociades
 al cicle de vida d'un model de Django.
 
 [comment]: # (!!!)
