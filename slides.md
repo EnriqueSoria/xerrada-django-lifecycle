@@ -261,6 +261,12 @@ def on_post_pre_save_receiver(sender, instance, raw, using, update_fields):
 
 Hem vingut ací per a parlar de certa llibreria, veritat? 
 
+[comment]: # (!!!)
+
+### Amb django-lifecycle
+
+Hem vingut ací per a parlar de certa llibreria, veritat? 
+
 Anem a reescriure els exemples anteriors amb django-lifecycle:
 
 
