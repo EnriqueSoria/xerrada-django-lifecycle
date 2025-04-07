@@ -539,8 +539,8 @@ Ara que ja hem vist lo fantàstic que es django-lifecycle...
 
 [comment]: # (!!!)
 
-# ¿Quan elegir cada opció?
-## Django signals
+## ¿Quan elegir cada opció?
+### Django signals
 
 - Models d'apps de tercers
 - Comportaments genèrics per a molts models
@@ -555,8 +555,8 @@ django-allauth:
 
 [comment]: # (!!!)
 
-# ¿Quan elegir cada opció?
-## Sobreescriure el `.save()`
+## ¿Quan elegir cada opció?
+### Sobreescriure el `.save()`
 
 - Casos d'ús molt simples
 
