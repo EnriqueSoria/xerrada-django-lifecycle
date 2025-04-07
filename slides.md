@@ -513,6 +513,8 @@ class WhenFieldContains(ChainableCondition):
 
 [comment]: # (!!!)
 
+## Condicions personalitzades
+
 Si les condicions que ens oferix django-lifecycle no ens apanyen, podem crear les nostres pròpies condicions:
 
 ```python
