@@ -333,10 +333,15 @@ Escollir [en quins moments](https://rsinger86.github.io/django-lifecycle/hooks_a
 
 Escollir [en quins moments](https://rsinger86.github.io/django-lifecycle/hooks_and_conditions/#lifecycle-moments) volem realitzar estes accions:
 
- - BEFORE_SAVE, AFTER_SAVE
- - BEFORE_CREATE, AFTER_CREATE
- - BEFORE_UPDATE, AFTER_UPDATE
- - BEFORE_DELETE, AFTER_DELETE
+```
+BEFORE_SAVE, AFTER_SAVE
+
+BEFORE_CREATE, AFTER_CREATE
+
+BEFORE_UPDATE, AFTER_UPDATE
+
+BEFORE_DELETE, AFTER_DELETE
+```
 
 [comment]: # (!!!)
 
