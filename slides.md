@@ -529,7 +529,7 @@ class Post(LifecycleModel):
 
 [comment]: # (!!!)
 
-# ¿Quan elegir cada opció?
+## ¿Quan elegir cada opció?
  - django signals
  - sobreescriure `.save()`
  - django-lifecycle
